@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { 
   Mail, 
   Phone, 
@@ -20,6 +21,11 @@ const GithubIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
+GithubIcon.propTypes = {
+  size: PropTypes.number,
+  className: PropTypes.string,
+};
+
 const LinkedinIcon = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -27,6 +33,11 @@ const LinkedinIcon = ({ size = 24, className = "" }) => (
     <circle cx="4" cy="4" r="2"></circle>
   </svg>
 );
+
+LinkedinIcon.propTypes = {
+  size: PropTypes.number,
+  className: PropTypes.string,
+};
 
 const Header = () => (
   <header className="bg-slate-900 text-white pt-20 pb-16 px-6 md:px-12 lg:px-24">
@@ -81,6 +92,11 @@ const SectionTitle = ({ icon: Icon, title }) => (
   </div>
 );
 
+SectionTitle.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
 const ExperienceCard = ({ role, company, location, date, bulletPoints, link }) => (
   <div className="mb-10 relative pl-8 md:pl-0">
     <div className="hidden md:block absolute left-[-41px] top-1.5 w-4 h-4 rounded-full border-4 border-white bg-blue-500 shadow-sm z-10"></div>
@@ -104,8 +120,8 @@ const ExperienceCard = ({ role, company, location, date, bulletPoints, link }) =
       </div>
     </div>
     <ul className="space-y-3 mt-4">
-      {bulletPoints.map((point, idx) => (
-        <li key={idx} className="flex items-start text-slate-700">
+      {bulletPoints.map((point) => (
+        <li key={point} className="flex items-start text-slate-700">
           <ChevronRight size={18} className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
           <span className="leading-relaxed">{point}</span>
         </li>
@@ -113,6 +129,15 @@ const ExperienceCard = ({ role, company, location, date, bulletPoints, link }) =
     </ul>
   </div>
 );
+
+ExperienceCard.propTypes = {
+  role: PropTypes.string.isRequired,
+  company: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  bulletPoints: PropTypes.arrayOf(PropTypes.string).isRequired,
+  link: PropTypes.string,
+};
 
 const EducationCard = ({ degree, school, date, gpa, coursework }) => (
   <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mb-6 hover:shadow-md transition-shadow">
@@ -137,8 +162,8 @@ const EducationCard = ({ degree, school, date, gpa, coursework }) => (
       <div>
         <h5 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3">Relevant Coursework</h5>
         <div className="flex flex-wrap gap-2">
-          {coursework.map((course, idx) => (
-            <span key={idx} className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200">
+          {coursework.map((course) => (
+            <span key={course} className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200">
               {course}
             </span>
           ))}
@@ -147,6 +172,14 @@ const EducationCard = ({ degree, school, date, gpa, coursework }) => (
     )}
   </div>
 );
+
+EducationCard.propTypes = {
+  degree: PropTypes.string.isRequired,
+  school: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  gpa: PropTypes.string,
+  coursework: PropTypes.arrayOf(PropTypes.string),
+};
 
 const SkillCategory = ({ icon: Icon, title, skills }) => (
   <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm">
@@ -157,14 +190,20 @@ const SkillCategory = ({ icon: Icon, title, skills }) => (
       <h4 className="text-lg font-bold text-slate-800">{title}</h4>
     </div>
     <div className="flex flex-wrap gap-2">
-      {skills.map((skill, idx) => (
-        <span key={idx} className="bg-slate-50 text-slate-700 border border-slate-200 px-3 py-1 rounded-full text-sm font-medium">
+      {skills.map((skill) => (
+        <span key={skill} className="bg-slate-50 text-slate-700 border border-slate-200 px-3 py-1 rounded-full text-sm font-medium">
           {skill}
         </span>
       ))}
     </div>
   </div>
 );
+
+SkillCategory.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default function App() {
   return (
