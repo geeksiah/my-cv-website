@@ -3,8 +3,6 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  Github, 
-  Linkedin, 
   ExternalLink, 
   Code, 
   Database, 
@@ -14,6 +12,21 @@ import {
   Award,
   ChevronRight
 } from 'lucide-react';
+
+const GithubIcon = ({ size = 24, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+  </svg>
+);
+
+const LinkedinIcon = ({ size = 24, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
 
 const Header = () => (
   <header className="bg-slate-900 text-white pt-20 pb-16 px-6 md:px-12 lg:px-24">
@@ -42,15 +55,15 @@ const Header = () => (
       </div>
       
       <div className="flex gap-4 mt-8">
-        <a href="#" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-          <Linkedin size={18} />
+        <a href="https://linkedin.com/in/josephdonkor" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+          <LinkedinIcon size={18} />
           LinkedIn
         </a>
-        <a href="#" className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-          <Github size={18} />
+        <a href="https://github.com/geeksiah" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+          <GithubIcon size={18} />
           GitHub
         </a>
-        <a href="#" className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+        <a href="https://sellwyk.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
           <ExternalLink size={18} />
           Portfolio
         </a>
@@ -68,7 +81,7 @@ const SectionTitle = ({ icon: Icon, title }) => (
   </div>
 );
 
-const ExperienceCard = ({ role, company, location, date, bulletPoints }) => (
+const ExperienceCard = ({ role, company, location, date, bulletPoints, link }) => (
   <div className="mb-10 relative pl-8 md:pl-0">
     <div className="hidden md:block absolute left-[-41px] top-1.5 w-4 h-4 rounded-full border-4 border-white bg-blue-500 shadow-sm z-10"></div>
     <div className="md:border-l-0 border-l-2 border-slate-200 absolute left-0 top-0 bottom-0 md:hidden"></div>
@@ -77,7 +90,13 @@ const ExperienceCard = ({ role, company, location, date, bulletPoints }) => (
     <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-3">
       <div>
         <h4 className="text-xl font-bold text-slate-800">{role}</h4>
-        <div className="text-lg text-blue-600 font-medium">{company}</div>
+        {link ? (
+          <a href={link} target="_blank" rel="noopener noreferrer" className="text-lg text-blue-600 font-medium hover:underline flex items-center gap-1 w-fit">
+            {company} <ExternalLink size={14} />
+          </a>
+        ) : (
+          <div className="text-lg text-blue-600 font-medium">{company}</div>
+        )}
       </div>
       <div className="text-slate-500 font-medium flex flex-col md:items-end mt-1 md:mt-0">
         <span>{date}</span>
@@ -187,6 +206,7 @@ export default function App() {
             <ExperienceCard 
               role="Lead Developer & Architect"
               company="Ferchr & Eventpeepo"
+              link="https://app.eventpeepo.com"
               location="Accra, Ghana"
               date="Recent"
               bulletPoints={[
@@ -198,6 +218,7 @@ export default function App() {
             <ExperienceCard 
               role="Founder & Lead Developer"
               company="Sellwyk.com"
+              link="https://sellwyk.com"
               location="Accra, Ghana"
               date="Recent"
               bulletPoints={[
